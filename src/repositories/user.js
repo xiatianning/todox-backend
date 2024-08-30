@@ -27,11 +27,7 @@ export default (db) => {
                 upsert: true,
                 returnDocument: "after"
             });
-
-        if (!result.lastErrorObject.updatedExisting) {
-            return result.value
-        }
-        return null;
+        return result;
     }
 
     return {
