@@ -6,7 +6,20 @@ export default (db) => {
         return await collection.insertOne(todo);
     }
 
+    async function updateOne(todoID, updateData) {
+        return await collection.updateOne({ todoID }, { $set: updateData });
+    }
+
+    async function findAllByUser(userID) {
+        return await collection.find(
+            { userID },
+            { projection: { name: 1, todoID: 1, userID: 1, created: 1, done: 1, _id: 0 } }
+        ).toArray();
+    }
+
     return {
-        insertOne
+        insertOne,
+        updateOne,
+        findAllByUser
     };
 };
